@@ -42,7 +42,8 @@ Conventional Commits(feat/fix/test/docs/refactor/chore)。スキャフォール�
 
 ## 1. 技術構成
 
-- R 4.x + sf / dplyr / readr / ggplot2 / glue / jsonlite / rmapshaper / testthat
+- R 4.6.1(`%LOCALAPPDATA%\Programs\R\R-4.6.1`、PATH 未登録 — Rscript.exe をフルパスで呼ぶ)
+- sf / dplyr / readr / readxl / ggplot2 / glue / jsonlite / rmapshaper / svglite / digest / testthat
 - サイトは R が glue テンプレート(site/)から直接 HTML を生成する。Quarto・Node ビルドは使わない
   (決定論ビルド G-04 を最優先するため。生成系を増やさない)
 - 出力は `out/` 一式(HTML + SVG + CSS)。閲覧時 JS 必須機能なし(F-11)

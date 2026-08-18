@@ -11,6 +11,7 @@ Imports:
     sf,
     dplyr,
     readr,
+    readxl,
     ggplot2,
     glue,
     jsonlite,
