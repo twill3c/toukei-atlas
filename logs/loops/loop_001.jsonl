@@ -10,3 +10,6 @@
 {"v": "1.2", "ts": "2026-08-19T07:23:15+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "test_run", "data": {"command": "testthat::test_dir tests/testthat", "passed": 23, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-19T07:23:15+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-19T07:23:15+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T07:23:59+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "commit", "data": {"sha": "ce2315ae807c819a345bb182c21bbb58298ab2ac", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-19T07:24:00+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T07:24:00+09:00", "project": "toukei-atlas", "loop_id": "loop_001", "event": "loop_end", "data": {"outcome": "success", "failure_count": 2, "summary": "3 ソースを SHA256 pin 化し 01_fetch/verify green(23 passed)。N03 年版選定の根拠と 2015 組替人口の内蔵を SPEC に反映"}}

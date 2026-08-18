@@ -16,7 +16,8 @@ Imports:
     glue,
     jsonlite,
     rmapshaper,
-    digest
+    digest,
+    zip
 Suggests:
     testthat,
     cartogram

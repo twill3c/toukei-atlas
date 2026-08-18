@@ -1,13 +1,71 @@
-# data/raw/ の境界(N03)と統計 CSV を結合し、data/processed/ に
-# 描画用データ(GeoPackage + テーマ別数値 CSV)を書き出す。
-#
-# 契約(loop_002 で実装、テスト T-004〜T-009 が先行):
-#  入力: data/raw/*(pins.csv 経由の取得物のみ)
-#  出力: data/processed/municipalities.gpkg
-#          - 列: code(JIS X 0402, character 5 桁), name, pref_code, pref_name,
-#                pop_total, pop_65over, pop_0_14, pop_2015, area_km2, geometry
-#          - CRS: JGD2011(EPSG:6668)、政令市は区単位、rmapshaper 簡略化済み
-#  不変量: code は全経路 character(先頭ゼロ保護)。結合は full join 後に
-#          両側の孤児を検査し、孤児 > 0 なら stop(G-02)。
+# data/raw/ の境界(N03)・国勢調査「主な結果」・面積調を結合し、
+# data/processed/municipalities.gpkg と prefectures_reference.csv を書き出す。
+# 契約は SPEC §2.3 / AGENTS §4。変換ロジックは R/prepare.R(純関数)。
 
-stop("loop_002 で実装する(テスト先行)。SPEC §2.3 / TEST_SPEC T-004〜T-009 参照")
+suppressPackageStartupMessages({
+  library(sf)
+  library(dplyr)
+  library(readr)
+  library(readxl)
+})
+source("R/prepare.R")
+
+dir.create("data/processed", showWarnings = FALSE, recursive = TRUE)
+
+# 1. 境界: zip からシェープファイルを展開(未展開時のみ)して読む
+shp_dir <- "data/raw/extracted"
+shp <- file.path(shp_dir, "N03-20210101_GML/N03-21_210101.shp")
+if (!file.exists(shp)) {
+  message("extract: boundary shapefile")
+  # utils::unzip は zip64(このアーカイブは 688MB の geojson を含む)非対応のため zip パッケージを使う。
+  # メンバー名の区切りが \\ のためリストから動的に解決する
+  members <- zip::zip_list("data/raw/boundary_n03_2021_gml.zip")$filename
+  wanted <- members[grepl("N03-21_210101\\.(shp|shx|dbf|prj)$", members)]
+  stopifnot(length(wanted) == 4)
+  zip::unzip("data/raw/boundary_n03_2021_gml.zip", files = wanted, exdir = shp_dir)
+  # 展開後のパスも区切り差を吸収して正規化する
+  got <- list.files(shp_dir, recursive = TRUE, full.names = TRUE,
+                    pattern = "N03-21_210101\\.(shp|shx|dbf|prj)$")
+  dir.create(dirname(shp), recursive = TRUE, showWarnings = FALSE)
+  file.rename(got, file.path(dirname(shp), basename(got)))
+}
+message("read: boundary")
+bnd <- st_read(shp, quiet = TRUE,
+               query = "SELECT N03_007 AS code FROM \"N03-21_210101\"")
+bnd <- st_set_crs(bnd, 6668)  # JGD2011(prj は JGD2011 地理座標系)
+
+# 2. 国勢調査「主な結果」
+message("read: census")
+census_raw <- suppressMessages(
+  read_excel("data/raw/census2020_major_results.xlsx",
+             sheet = "第１面事項_2020年", skip = 9, col_names = FALSE)
+)
+census <- parse_census_major(census_raw)
+muni <- census_municipal_units(census)
+ref <- census_reference(census)
+
+# 3. 面積調(令和2年10月1日時点)
+message("read: area")
+area_raw <- suppressMessages(
+  read_csv("data/raw/area_gsi_r1_r5_mencho.csv", skip = 4,
+           locale = locale(encoding = "cp932"), col_types = cols(.default = "c"))
+)
+area <- parse_area_csv(area_raw)
+
+# 4. 集約・結合
+message("aggregate: boundary (union by code) — 数分かかる")
+bnd_agg <- aggregate_boundary(bnd)
+m <- join_municipalities(bnd_agg, muni, area)
+
+# 5. 書き出し
+message("write: municipalities.gpkg (", nrow(m), " units)")
+unlink("data/processed/municipalities.gpkg")
+st_write(m, "data/processed/municipalities.gpkg", quiet = TRUE)
+
+ref_out <- ref |>
+  transmute(level, pref_code = substr(code, 1, 2), code, name,
+            pop_total, pop_2015,
+            area_ref = area_pub, density_ref = density_pub,
+            rate_65over_pub)
+write_csv(ref_out, "data/processed/prefectures_reference.csv")
+message("done")
