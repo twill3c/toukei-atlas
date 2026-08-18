@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{title}} — toukei-atlas 日本統計地図帳</title>
+<meta name="description" content="{{title}}の市区町村別主題図。{{source}}に基づく。">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="container">
+  <header class="page-header">
+    <nav class="breadcrumb"><a href="../">🗾 toukei-atlas</a> / {{title}}</nav>
+    <h1>{{title}}</h1>
+    <p class="definition">{{definition}}</p>
+  </header>
+
+  <!-- 定型レイアウト(F-08): 4 ブロック -->
+  <main class="theme-layout">
+    <section class="block-map" aria-label="主題図">
+      <figure>
+        <img src="map.svg" alt="{{title}}の市区町村別地図" width="1200" height="1400">
+      </figure>
+    </section>
+
+    <section class="block-ranking" aria-label="ランキング">
+      <h2>上位・下位 10 市区町村</h2>
+      <figure>
+        <img src="ranking.svg" alt="{{title}}の上位・下位10市区町村の横棒グラフ" width="640" height="880">
+      </figure>
+    </section>
+
+    <section class="block-hist" aria-label="分布">
+      <h2>全市区町村の分布</h2>
+      <figure>
+        <img src="hist.svg" alt="{{title}}のヒストグラム" width="640" height="400">
+      </figure>
+    </section>
+
+    <section class="block-notes" aria-label="出典と定義">
+      <h2>出典・定義</h2>
+      <dl>
+        <dt>出典</dt><dd>{{source}}</dd>
+        <dt>指標の定義</dt><dd>{{definition}}(単位: {{unit}})</dd>
+        <dt>集計単位</dt><dd>市区町村(政令指定都市は区単位)、{{n_units}} 地域</dd>
+        <dt>境界データ</dt><dd>{{boundary_source}}(位相保存簡略化済み)</dd>
+        <dt>データ取得日</dt><dd>{{fetched_date}}</dd>
+        <dt>加工</dt><dd>本サイトの数値は出典の公表値を上記定義で再集計したものであり、加工後の値の責任は本サイトにある。</dd>
+      </dl>
+    </section>
+  </main>
+
+  {{footer}}
+</div>
+</body>
+</html>

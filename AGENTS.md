@@ -1,0 +1,91 @@
+<!-- scaffold:block agents_core v1.8.0 -->
+## 共通規律(scaffold 管理領域 — 手動編集禁止)
+
+このセクションはスキャフォールド・レジストリが管理する。内容を変更したい場合は、
+このファイルを直接編集せず、失敗ログ → HARNESS_CHANGELOG 起票 → レジストリ改訂 → `scaffoldctl update` の経路で行うこと。
+
+### 7 段階ループプロトコル
+
+| 段階 | 名称 | 完了条件 |
+|---|---|---|
+| 1 | 計画 | 対象の要求 ID を特定し、`loop_start` を記録した |
+| 2 | 文脈読込 | SPEC.md / IMPLEMENTATION_GUIDE.md の該当箇所と、直近ループのログを読んだ |
+| 3 | テスト先行 | TEST_SPEC.md にトレースする失敗するテストを書き、赤を確認した |
+| 4 | 実装 | ファイル編集 2 回ごとにテストを実行し、赤のまま次の編集に進んでいない |
+| 5 | 検証 | 全テスト合格 + 独立再計算(該当時)を確認した |
+| 6 | 文書同期 | SPEC/docs と実装の乖離(SPEC-DRIFT)を解消し、生成ドキュメントを再生成した |
+| 7 | 完了 | `loop_end` を記録し、ループログ validate に合格し、専用コミットを積んだ |
+
+### ループ可観測性
+
+全ループは loop-observability の規律(LOOP_LOG_SPEC / FAILURE_TAXONOMY)に従い
+`logs/loops/{loop_id}.jsonl` に記録する。失敗は気づいた瞬間に分類コード付きで記録する。
+ツーストライク(LL-10)と S1 即時起票(LL-12)は本プロジェクトでも有効である。
+
+### エスカレーション規範
+
+以下の場合は作業を止め、`escalation` を記録してから人間に確認する:
+仕様の複数解釈(SPEC-AMB 相当)/ スコープ外ファイルへの変更が必要になった /
+破壊的操作(履歴改変・データ削除・強制 push)/ 同種の修正の 3 回目の失敗(PROC-LOOP)。
+
+### コミット規約
+
+Conventional Commits(feat/fix/test/docs/refactor/chore)。スキャフォールド更新は
+`chore: scaffold vX.Y.Z` の専用コミットで行い、機能変更と混ぜない。
+<!-- /scaffold:block agents_core -->
+
+# AGENTS.md — toukei-atlas
+
+日本統計地図帳。公的統計を R(sf + ggplot2)で市区町村単位の主題図にし、
+1 テーマ 1 ページの静的サイトとして Vercel から配信する。
+政府公表値との照合オラクル(G-01〜G-06)で検証する。仕様は SPEC.md、テストは TEST_SPEC.md。
+
+## 1. 技術構成
+
+- R 4.x + sf / dplyr / readr / ggplot2 / glue / jsonlite / rmapshaper / testthat
+- サイトは R が glue テンプレート(site/)から直接 HTML を生成する。Quarto・Node ビルドは使わない
+  (決定論ビルド G-04 を最優先するため。生成系を増やさない)
+- 出力は `out/` 一式(HTML + SVG + CSS)。閲覧時 JS 必須機能なし(F-11)
+- 依存の追加は AGENTS.md のこの節と DESCRIPTION の両方を更新する専用コミットで行う
+
+## 2. looplog 運用の注意
+
+- 新しいイベント種別を初めて使う前に `harness/looplog.py` の EVENT_SPECS(必須フィールドと型)を確認する。推測で引数を組み立てない。
+- `test_run` の passed / failed は**直前のテスト出力の数値をそのまま転記**する。記憶で書かない。
+- `test_run` の記録はテスト実行と**別コマンド**で行う(HC-002)。
+- enum フィールドの許容値は `schema/taxonomy.json` と looplog.py の ENUMS が正。初回使用前に確認する(HC-002)。
+
+## 3. 品質ゲート(完了条件)
+
+`Rscript build/verify.R` が green であること。内訳は SPEC.md §4(G-01〜G-06 + test + build)。
+
+ゲートを緩める変更(公表値照合の許容誤差拡大、テスト削除・skip、SVG ハッシュ期待値の
+理由なき更新、`.wt/gate.json` の上限変更)は、人間の承認なしに行わない。
+
+## 4. アーキテクチャ規約
+
+- `R/` は**純関数のみ**。ネットワーク・ファイル書き込み・`Sys.time()`/`Sys.Date()`/乱数を直接呼ばない。
+  取得日などの時刻情報は build スクリプトから**引数で注入**する(N-01 決定論の担保)。
+- 副作用(ダウンロード・ファイル IO・レンダリング実行)は `build/` のスクリプトに集約する。
+  依存方向は一方向: `build/` → `R/`。逆方向は禁止。
+- データ取得は `data/pins.csv`(URL + SHA256 + ライセンス表記)経由のみ(F-13)。
+  ハッシュ不一致で即失敗させる。アドホックな download.file を書かない。
+- ggplot オブジェクトの構築(R/)と `ggsave` 実行(build/)を分離する。テストは ggplot
+  オブジェクトの layer/scale を検査し、SVG 化は G-04 のハッシュテストだけが行う。
+- 市区町村コード(JIS X 0402、5 桁文字列)がパイプライン全体の結合キー。先頭ゼロを守るため
+  **全経路で character 型**を強制する。integer に落ちた瞬間に北海道(01xxx)が壊れる。
+- 座標参照系は JGD2011(EPSG:6668)に統一。描画時の投影は各テーマ定義で明示する。
+
+## 5. 変更禁止領域
+
+- `data/raw/` 配下(取得物。手で編集しない — 修正は pins.csv と取得スクリプトで)
+- `tests/testthat/fixtures/` の期待 SVG(更新は `test: update fixtures` 専用コミット + 理由記録)
+- scaffold:block 管理領域(冒頭の共通規律)
+
+## 6. デプロイ
+
+- Vercel 静的配信。デプロイ対象は `out/` のみ(`vercel deploy --prod` を out/ で実行、または
+  vercel.json の outputDirectory 指定)。R はビルドマシン(ローカル)でのみ実行し、
+  Vercel 上でビルドしない(Vercel に R ランタイムがないため — これが本プロジェクトの前提)。
+- 本番 URL: https://toukei-atlas.vercel.app(初回デプロイ時に確定)
+- 初回デプロイ後に app-menu(🗺️ 地図・データ可視化)へのカード登録コミットを push する。

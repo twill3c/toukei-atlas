@@ -1,0 +1,94 @@
+/* toukei-atlas — 印刷物品質の静的主題図サイト。app-menu と同系のトークン設計 */
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1a1d21;
+  --muted: #5c6470;
+  --border: #e2e5ea;
+  --accent: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --card: #191e24;
+    --text: #e8eaed;
+    --muted: #9aa3af;
+    --border: #2a313a;
+    --accent: #7aa2ff;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  line-height: 1.7;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px 64px; }
+.page-header { padding: 40px 0 16px; }
+.breadcrumb { font-size: 0.85rem; }
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); }
+h1 { font-size: 1.8rem; margin-top: 4px; }
+h2 { font-size: 1.05rem; color: var(--muted); margin-bottom: 10px; }
+.definition { color: var(--muted); margin-top: 4px; }
+
+/* 定型レイアウト(F-08): 地図が主役、右列にランキング+分布、下段に注記 */
+.theme-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "map ranking"
+    "map hist"
+    "notes notes";
+  gap: 20px;
+  margin-top: 12px;
+}
+.block-map     { grid-area: map; }
+.block-ranking { grid-area: ranking; }
+.block-hist    { grid-area: hist; }
+.block-notes   { grid-area: notes; }
+
+.block-map figure, .block-ranking figure, .block-hist figure {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  overflow-x: auto;
+}
+figure img { max-width: 100%; height: auto; display: block; }
+
+.block-notes dl {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 18px;
+  font-size: 0.9rem;
+}
+.block-notes dt { color: var(--muted); font-weight: 600; }
+
+/* スマホ(N-02): 1 カラム化 */
+@media (max-width: 800px) {
+  .theme-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "map" "ranking" "hist" "notes";
+  }
+  .block-notes dl { grid-template-columns: 1fr; }
+}
+
+.site-footer {
+  margin-top: 56px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.site-footer a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer a:hover { color: var(--accent); }

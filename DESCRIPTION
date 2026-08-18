@@ -1,0 +1,21 @@
+Package: toukeiatlas
+Title: Japan Statistical Atlas (toukei-atlas)
+Version: 0.0.1
+Description: Static thematic-map atlas of Japanese official statistics,
+    rendered with sf + ggplot2 and published as a static site on Vercel.
+    This DESCRIPTION pins the dependency list; the project is built with
+    build/build_all.R, not R CMD build.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports:
+    sf,
+    dplyr,
+    readr,
+    ggplot2,
+    glue,
+    jsonlite,
+    rmapshaper,
+    digest
+Suggests:
+    testthat,
+    cartogram

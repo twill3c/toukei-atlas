@@ -1,0 +1,14 @@
+# 取得物・中間生成物(pins.csv から再現可能)
+data/raw/
+data/processed/
+
+# ビルド成果物(Vercel へは out/ を直接デプロイ)
+out/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Vercel
+.vercel/

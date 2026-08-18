@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>toukei-atlas — 日本統計地図帳</title>
+<meta name="description" content="日本の公的統計を市区町村単位の主題図で見る日本統計地図帳。R(sf + ggplot2)による静的生成。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header class="page-header">
+    <h1>🗾 toukei-atlas — 日本統計地図帳</h1>
+    <p class="definition">日本の公的統計を市区町村単位の主題図で。全数値は公表値との照合検証済み。</p>
+  </header>
+
+  <main class="index-grid">
+    {{cards}}
+  </main>
+
+  {{footer}}
+</div>
+</body>
+</html>
