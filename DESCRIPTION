@@ -15,7 +15,8 @@ Imports:
     ggplot2,
     glue,
     jsonlite,
-    rmapshaper,
+    viridisLite,
+    svglite,
     digest,
     zip
 Suggests:

@@ -66,11 +66,13 @@ parse_area_csv <- function(raw) {
 }
 
 # N03 境界(code 列のみの sf)を集計単位に整える:
-# 除外コード・コード無し(所属未定地)を落とし、簡略化 → コード単位に union。
-aggregate_boundary <- function(bnd, tolerance_deg = 0.0008) {
+# 除外コード・コード無し(所属未定地)を落とし、コード単位に union。
+# 簡略化はここでは行わない — gpkg は正確な幾何を保持し(G-03 の面積照合対象)、
+# 描画用の簡略化は 03_render 側で行う(HC-001 系の教訓: s2 有効時の st_simplify は
+# 許容値の単位が異なり GEOMETRYCOLLECTION 化もするため、うかつに挟まない)。
+aggregate_boundary <- function(bnd) {
   bnd <- bnd[!is.na(bnd$code) & !(bnd$code %in% EXCLUDED_CODES), ]
   bnd <- st_make_valid(bnd)
-  st_geometry(bnd) <- st_simplify(st_geometry(bnd), dTolerance = tolerance_deg)
   bnd <- bnd[!st_is_empty(bnd), ]
   agg <- bnd |>
     group_by(code) |>

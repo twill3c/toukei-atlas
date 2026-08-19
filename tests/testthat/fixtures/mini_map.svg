@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='288.00pt' height='288.00pt' viewBox='0 0 288.00 288.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHwyODguMDB8MC4wMHwyODguMDA='>
+    <rect x='0.00' y='0.00' width='288.00' height='288.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHwyODguMDB8MC4wMHwyODguMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpOC43OHwyNzkuMjJ8MC4wMHwyODguMDA='>
+    <rect x='8.78' y='0.00' width='270.43' height='288.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpOC43OHwyNzkuMjJ8MC4wMHwyODguMDA=)'>
+<rect x='8.78' y='0.00' width='270.43' height='288.00' style='stroke-width: 0.00; stroke: none; fill: #FFFFFF;' />
+</g>
+<g clip-path='url(#cpMC4wMHwyODguMDB8MC4wMHwyODguMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpOC43OHwyNzkuMjJ8MTcuNTN8Mjg4LjAw'>
+    <rect x='8.78' y='17.53' width='270.43' height='270.47' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpOC43OHwyNzkuMjJ8MTcuNTN8Mjg4LjAw)'>
+<path d='M 21.08 275.71 L 144.00 275.71 L 144.00 152.76 L 21.08 152.76 L 21.08 275.71 Z' style='fill-rule: evenodd; fill: #440154; stroke-width: 0.085; stroke: #FFFFFF; stroke-linecap: butt;' />
+<path d='M 144.00 275.71 L 266.92 275.71 L 266.92 152.76 L 144.00 152.76 L 144.00 275.71 Z' style='fill-rule: evenodd; fill: #2B9089; stroke-width: 0.085; stroke: #FFFFFF; stroke-linecap: butt;' />
+<path d='M 21.08 152.76 L 144.00 152.76 L 144.00 29.82 L 21.08 29.82 L 21.08 152.76 Z' style='fill-rule: evenodd; fill: #FDE725; stroke-width: 0.085; stroke: #FFFFFF; stroke-linecap: butt;' />
+</g>
+<g clip-path='url(#cpMC4wMHwyODguMDB8MC4wMHwyODguMDA=)'>
+<text x='220.65' y='164.69' style='font-size: 9.00px; font-family: "Arial";' textLength='36.00px' lengthAdjust='spacingAndGlyphs'>高齢化率</text>
+<text x='220.65' y='174.41' style='font-size: 9.00px; font-family: "Arial";' textLength='14.00px' lengthAdjust='spacingAndGlyphs'>(%)</text>
+<image width='17.28' height='86.40' x='220.65' y='180.83' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAA2ElEQVQ4jZWRyRVDIQhFL/SS/stKFUIWOSoomp8NR3gDg7T3y9UQ1FxQQ0mpPEz5G+21FsgkbZa11WUxIALtahCtiAZzllYCoO7SA/JHeqVYqeAnZRxs+tkJtUDpe1iwJ6f5P5ZPmWca2jbSeStxUBxUXPqLWQOlABZFheLSDQqgVgy0BEAFqYGoSBQ/NT/2gP61cdWuEF+CR8p2ukTG/UJZGn3JBWU7ne9oseCc4M4jr3W8c+UXBxoAnmt7iN0yumoLShm4dHvkMijWa76glhUztaydBrahH9ZJlv7ajQdXAAAAAElFTkSuQmCC'/>
+<polyline points='234.48,267.09 237.93,267.09 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='234.48,238.38 237.93,238.38 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='234.48,209.68 237.93,209.68 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='234.48,180.98 237.93,180.98 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='224.11,267.09 220.65,267.09 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='224.11,238.38 220.65,238.38 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='224.11,209.68 220.65,209.68 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<polyline points='224.11,180.98 220.65,180.98 ' style='stroke-width: 0.38; stroke: #FFFFFF;' />
+<text x='243.41' y='269.95' style='font-size: 8.00px; font-family: "Arial";' textLength='8.91px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='243.41' y='241.25' style='font-size: 8.00px; font-family: "Arial";' textLength='8.91px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='243.41' y='212.55' style='font-size: 8.00px; font-family: "Arial";' textLength='8.91px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='243.41' y='183.84' style='font-size: 8.00px; font-family: "Arial";' textLength='8.91px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='13.15' y='14.79' style='font-size: 13.00px; font-weight: bold; font-family: "Arial";' textLength='52.00px' lengthAdjust='spacingAndGlyphs'>高齢化率</text>
+</g>
+</g>
+</svg>

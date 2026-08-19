@@ -11,3 +11,8 @@
 {"v": "1.2", "ts": "2026-08-19T08:51:58+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "test_run", "data": {"command": "testthat::test_dir tests/testthat", "passed": 53, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-19T08:51:58+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-19T08:51:59+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T08:52:33+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "commit", "data": {"sha": "829cd10dcab56330cb3b4b48c2c90531eebcdffb", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-19T08:52:33+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T08:52:33+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "loop_end", "data": {"outcome": "success", "failure_count": 5, "summary": "municipalities.gpkg(1,896 地域)生成、G-01〜G-03 全 green(53 passed)。双葉町の - 表記と北方領土の面積定義域という 2 つのデータ罠を解消、HC-001 起票"}}
+{"v": "1.2", "ts": "2026-08-19T08:52:49+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "correction", "data": {"supersedes": 16, "reason": "loop_end.failure_count を 5 と誤記(failure レコードは 4 件)"}}
+{"v": "1.2", "ts": "2026-08-19T08:52:49+09:00", "project": "toukei-atlas", "loop_id": "loop_002", "event": "loop_end", "data": {"outcome": "success", "failure_count": 4, "summary": "municipalities.gpkg(1,896 地域)生成、G-01〜G-03 全 green(53 passed)。双葉町の - 表記と北方領土の面積定義域という 2 つのデータ罠を解消、HC-001 起票"}}
