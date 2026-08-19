@@ -12,3 +12,4 @@ out/
 
 # Vercel
 .vercel/
+build/*.log
