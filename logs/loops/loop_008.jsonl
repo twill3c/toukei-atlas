@@ -6,3 +6,6 @@
 {"v": "1.2", "ts": "2026-08-19T22:10:20+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "test_run", "data": {"command": "harness/testrun.py (testthat::test_dir)", "passed": 222, "failed": 0, "errors": 0}}
 {"v": "1.2", "ts": "2026-08-19T22:10:32+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-19T22:10:32+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T22:11:35+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "commit", "data": {"sha": "3bd362820de835461e946ff09eb4f9d7c5448355", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-19T22:11:35+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T22:11:50+09:00", "project": "toukei-atlas", "loop_id": "loop_008", "event": "loop_end", "data": {"outcome": "success", "failure_count": 0, "summary": "フッタ 5 リンク完成(歩き方・設計図アーティファクト公開+差し込み)。全ページ再デプロイ・本番でリンク確認。222 テスト green"}}
