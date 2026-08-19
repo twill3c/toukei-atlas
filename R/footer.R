@@ -1,7 +1,6 @@
 # フッタ定義(F-10)。フリート標準の並び:
 # MIT License(© 2026 坂田哲朗)・GitHub・歩き方・設計図・App Menu
-# 歩き方/設計図はアーティファクト公開後に URL を差し込む。それまで行自体を出さない
-# (プレースホルダ URL の出力は F-10 で禁止)。
+# 歩き方/設計図はアーティファクト(2026-08-19 公開。閲覧には所有者の共有設定が必要)。
 
 footer_links <- function() {
   links <- list(
@@ -9,8 +8,10 @@ footer_links <- function() {
          href = "https://github.com/twill3c/toukei-atlas/blob/main/LICENSE"),
     list(label = "GitHub",
          href = "https://github.com/twill3c/toukei-atlas"),
-    # list(label = "toukei-atlas の歩き方", href = "<artifact URL>"),
-    # list(label = "toukei-atlas 設計図",   href = "<artifact URL>"),
+    list(label = "toukei-atlas の歩き方",
+         href = "https://claude.ai/code/artifact/ba818e89-dcd9-4ada-8688-c43f549f453e"),
+    list(label = "toukei-atlas 設計図",
+         href = "https://claude.ai/code/artifact/5cda1729-d141-4eb0-9a29-83c7b6a539bf"),
     list(label = "App Menu",
          href = "https://app-menu-amber.vercel.app")
   )
