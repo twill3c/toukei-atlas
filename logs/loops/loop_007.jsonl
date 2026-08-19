@@ -12,3 +12,6 @@
 {"v": "1.2", "ts": "2026-08-19T21:43:33+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "test_run", "data": {"command": "harness/testrun.py (testthat::test_dir)", "passed": 215, "failed": 0, "errors": 0}}
 {"v": "1.2", "ts": "2026-08-19T21:43:47+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-19T21:43:47+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T21:44:46+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "commit", "data": {"sha": "07625dc2cebf2311a6b6f9cc17561f410db3f767", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-19T21:44:46+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T21:44:47+09:00", "project": "toukei-atlas", "loop_id": "loop_007", "event": "loop_end", "data": {"outcome": "success", "failure_count": 3, "summary": "フローマップを公開(flow 200・index カード 7 枚)。OD オラクル(総和=公表 2,463,992・行/列和・純移動 0)green。HC-003 起票+testrun.py 導入。215 テスト green"}}
