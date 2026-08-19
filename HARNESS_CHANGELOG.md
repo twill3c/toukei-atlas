@@ -18,3 +18,17 @@
 | 効果検証 | 以後 5 ループで VERIF-FALSE の再発 0 件なら Closed |
 | propagation | toukei-atlas ✅(本文書 + TEST_SPEC.md)/ レジストリ還流 ⬜(人間の承認待ち) |
 | 状態 | Open |
+
+## HC-002
+
+| 項目 | 内容 |
+|---|---|
+| 起票日 | 2026-08-19 |
+| トリガー | `TOOL-ENV` × 2(loop_002: utils::unzip が zip64 を静かに失敗 / loop_006: 実験スクリプトが segfault、`Rscript … \| tail` のパイプ終端で exit 0 に偽装され検知遅延) |
+| 診断 | ①ネイティブ層(unzip/GEOS)の新しい呼び出し経路を最小入力のスモークなしで本線に入れた。②パイプで包んだ実行はパイプ終端の exit code が返り、R の異常終了(segfault 含む)を隠す |
+| 改訂 | AGENTS.md §4 に追加: 「(a) ネイティブ拡張・外部アーカイブ形式の新しい呼び出し経路は、最小入力でのスモーク(戻り値と失敗モードの確認)を通してから本線に入れる。(b) `Rscript … \| tail` のようにパイプで包んで成否判定しない — 出力はファイルへリダイレクトし、スクリプト末尾の明示マーカー(done 行)と exit code の両方で判定する」 |
+| 種別 | agents_md |
+| SCAFFOLD_VERSION | 1.8.0(プロジェクト局所。レジストリ還流は人間の承認待ち) |
+| 効果検証 | 以後 5 ループで TOOL-ENV の再発 0 件なら Closed |
+| propagation | toukei-atlas ✅(本文書 + AGENTS.md §4)/ レジストリ還流 ⬜ |
+| 状態 | Open |

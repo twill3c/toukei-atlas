@@ -56,8 +56,13 @@ for (th in THEMES) {
   save_map_svg(plot_hist(vals, th, spec),
                file.path("out", th$id, "hist.svg"), width = 6.5, height = 4)
 
-  html <- render_page_html(tpl_page, th, footer, nrow(m), fetched_date,
-                           BOUNDARY_SOURCE, theme_definition_text(th))
+  html <- render_page_html(
+    tpl_page, th, footer,
+    unit_label = paste0("市区町村(政令指定都市は区単位)、",
+                        format(nrow(m), big.mark = ","), " 地域"),
+    fetched_date = fetched_date,
+    boundary_source = BOUNDARY_SOURCE,
+    definition = theme_definition_text(th))
   writeLines(html, file.path("out", th$id, "index.html"), useBytes = TRUE)
 
   rng <- range(vals$value, na.rm = TRUE)
@@ -66,6 +71,50 @@ for (th in THEMES) {
                           format(sum(!is.na(vals$value)), big.mark = ","))
   cards <- c(cards, render_card_html(th, summary_line))
 }
+
+# ---- F-06 人口カルトグラム(ドーリング・都道府県単位) ----
+message("render: cartogram")
+source("R/cartogram_page.R")
+ref <- read_csv("data/processed/prefectures_reference.csv",
+                col_types = cols(.default = "c")) |>
+  filter(level == "pref") |>
+  transmute(pref_code, name, pop = as.numeric(pop_total))
+
+old_s2 <- sf_use_s2(); suppressMessages(sf_use_s2(FALSE))
+pref_geom <- m |> group_by(pref_code) |> summarise(.groups = "drop")
+suppressMessages(sf_use_s2(old_s2))
+ctr <- st_coordinates(st_centroid(st_transform(st_geometry(pref_geom), AEA_JP)))
+pref_df <- pref_geom |> st_drop_geometry() |>
+  mutate(x = ctr[, 1], y = ctr[, 2]) |>
+  inner_join(ref, by = "pref_code")
+stopifnot(nrow(pref_df) == 47)
+
+circles <- dorling_circles(pref_df)
+carto_def <- list(id = "cartogram", title = "人口カルトグラム",
+                  unit = "万人",
+                  source = "国勢調査 2020(e-Stat)公表の都道府県人口")
+vals_pref <- tibble(code = pref_df$pref_code, name = pref_df$name,
+                    value = pref_df$pop / 1e4)
+spec_pref <- scale_spec("seq", vals_pref$value)
+
+dir.create("out/cartogram", showWarnings = FALSE)
+save_map_svg(plot_cartogram(circles), "out/cartogram/map.svg",
+             width = 8, height = 8.5)
+save_map_svg(plot_ranking(ranking_data(vals_pref), carto_def, spec_pref),
+             "out/cartogram/ranking.svg", width = 6.5, height = 9)
+save_map_svg(plot_hist(vals_pref, carto_def, spec_pref, bins = 24),
+             "out/cartogram/hist.svg", width = 6.5, height = 4)
+
+carto_html <- render_page_html(
+  tpl_page, carto_def, footer,
+  unit_label = "都道府県、47 地域",
+  fetched_date = fetched_date,
+  boundary_source = paste0(BOUNDARY_SOURCE, "(円の配置座標に使用)"),
+  definition = "円の面積 ∝ 2020 年総人口(ドーリング・カルトグラム。円面積の比 = 人口比が厳密)")
+writeLines(carto_html, "out/cartogram/index.html", useBytes = TRUE)
+cards <- c(cards, render_card_html(
+  list(id = "cartogram", title = "人口カルトグラム"),
+  "円の面積 = 都道府県人口。ドーリング式(面積比例が厳密)"))
 
 writeLines(render_index_html(tpl_index, paste(cards, collapse = "\n"), footer),
            "out/index.html", useBytes = TRUE)

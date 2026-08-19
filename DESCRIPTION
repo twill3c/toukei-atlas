@@ -18,7 +18,7 @@ Imports:
     viridisLite,
     svglite,
     digest,
-    zip
-Suggests:
-    testthat,
+    zip,
     cartogram
+Suggests:
+    testthat

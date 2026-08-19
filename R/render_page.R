@@ -3,14 +3,14 @@
 suppressPackageStartupMessages(library(glue))
 
 # テーマページ 1 枚分の HTML。tpl は site/template_page.html の文字列。
-render_page_html <- function(tpl, theme_def, footer, n_units, fetched_date,
+render_page_html <- function(tpl, theme_def, footer, unit_label, fetched_date,
                              boundary_source, definition) {
   glue(tpl,
        title = theme_def$title,
        definition = definition,
        source = theme_def$source,
        unit = theme_def$unit,
-       n_units = format(n_units, big.mark = ","),
+       unit_label = unit_label,
        boundary_source = boundary_source,
        fetched_date = fetched_date,
        footer = footer,

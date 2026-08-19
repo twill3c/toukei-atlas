@@ -1,0 +1,12 @@
+read: municipalities.gpkg
+simplify for rendering
+[1] TRUE
+render: koreika
+render: jinko-mitsudo
+render: jinko-zogen
+render: nensho
+render: tandoku
+render: cartogram
+although coordinates are longitude/latitude, st_union assumes that they are
+planar
+done → out/
