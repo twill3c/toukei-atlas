@@ -7,3 +7,6 @@
 {"v": "1.2", "ts": "2026-08-19T09:33:03+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "test_run", "data": {"command": "testthat::test_dir tests/testthat", "passed": 143, "failed": 0}}
 {"v": "1.2", "ts": "2026-08-19T09:33:03+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
 {"v": "1.2", "ts": "2026-08-19T09:33:03+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:33:33+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "commit", "data": {"sha": "8ddfdac0c6b08ce4d13a6d21eda1dbb21706933f", "kind": "feat"}}
+{"v": "1.2", "ts": "2026-08-19T09:33:33+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:33:33+09:00", "project": "toukei-atlas", "loop_id": "loop_003", "event": "loop_end", "data": {"outcome": "success", "failure_count": 1, "summary": "4 テーマの定型ページ + index を生成、143 テスト green。s2/GEOS の簡略化 semantics の罠(map.svg 218MB)を実験で解消し 1.2MB に"}}

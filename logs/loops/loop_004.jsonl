@@ -1,0 +1,8 @@
+{"v": "1.2", "ts": "2026-08-19T09:34:43+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "loop_start", "data": {"goal": "初回公開: GitHub リポジトリ作成・Vercel 本番デプロイ(out/ 静的配信)・稼働検証・app-menu カード公開", "spec_refs": ["F-10", "F-11", "N-02"], "scaffold_version": "1.8.0", "agent": "claude-fable-5"}}
+{"v": "1.2", "ts": "2026-08-19T09:34:43+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 1, "stage_name": "計画", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:34:44+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 2, "stage_name": "文脈読込", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:34:44+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 3, "stage_name": "テスト先行", "result": "skip"}}
+{"v": "1.2", "ts": "2026-08-19T09:37:16+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 4, "stage_name": "実装", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:37:16+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 5, "stage_name": "検証", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:37:16+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "stage_end", "data": {"stage": 6, "stage_name": "文書同期", "result": "pass"}}
+{"v": "1.2", "ts": "2026-08-19T09:37:17+09:00", "project": "toukei-atlas", "loop_id": "loop_004", "event": "loop_end", "data": {"outcome": "success", "failure_count": 0, "summary": "GitHub 公開・Vercel 本番デプロイ(toukei-atlas.vercel.app、全ページ/SVG 200 確認)・app-menu カード公開(反映確認済み)"}}
