@@ -52,8 +52,9 @@ Conventional Commits(feat/fix/test/docs/refactor/chore)。スキャフォール�
 ## 2. looplog 運用の注意
 
 - 新しいイベント種別を初めて使う前に `harness/looplog.py` の EVENT_SPECS(必須フィールドと型)を確認する。推測で引数を組み立てない。
-- `test_run` の passed / failed は**直前のテスト出力の数値をそのまま転記**する。記憶で書かない。
-- `test_run` の記録はテスト実行と**別コマンド**で行う(HC-002)。
+- テスト実行と `test_run` 記録は **`python harness/testrun.py --loop <loop_id>` 経由を必須**とする(HC-003)。
+  実出力から counts を機械抽出して自動 append するため、手動転記は行わない。
+  looplog append で test_run を手書きするのは、testrun.py 自体が壊れている場合のみ。
 - enum フィールドの許容値は `schema/taxonomy.json` と looplog.py の ENUMS が正。初回使用前に確認する(HC-002)。
 
 ## 3. 品質ゲート(完了条件)

@@ -116,6 +116,49 @@ cards <- c(cards, render_card_html(
   list(id = "cartogram", title = "人口カルトグラム"),
   "円の面積 = 都道府県人口。ドーリング式(面積比例が厳密)"))
 
+# ---- F-07 都道府県間人口移動フローマップ ----
+message("render: flow")
+source("R/flow_page.R")
+library(readxl)
+flow_raw <- suppressMessages(
+  read_excel("data/raw/flow_jumin2020_od.xlsx", sheet = 1, col_names = FALSE))
+od <- parse_od(flow_raw)
+net <- net_migration(od) |>
+  left_join(ref |> select(pref_code, name), by = "pref_code")
+# pref_geom は planar combine 由来で退化エッジを含みうる — s2 を切って重心を取る(HC-002)
+old_s2 <- sf_use_s2(); suppressMessages(sf_use_s2(FALSE))
+ctr_ll <- suppressWarnings(st_coordinates(st_centroid(st_geometry(pref_geom))))
+suppressMessages(sf_use_s2(old_s2))
+ctr_df <- tibble(pref_code = pref_geom$pref_code,
+                 x = ctr_ll[, 1], y = ctr_ll[, 2])
+
+flow_def <- list(id = "flow", title = "都道府県間人口移動",
+                 unit = "人",
+                 source = "住民基本台帳人口移動報告 2020 年 表2(総務省統計局)")
+vals_net <- tibble(code = net$pref_code, name = net$name, value = net$net)
+spec_net <- scale_spec("div", vals_net$value)
+
+dir.create("out/flow", showWarnings = FALSE)
+save_map_svg(plot_flow_map(pref_geom, net, flows_top(od, 30), ctr_df,
+                           xlim = c(127, 146), ylim = c(26, 46),
+                           caption = "曲線 = 移動者数上位 30 フロー(矢印は移動方向)。塗り = 転入超過数。"),
+             "out/flow/map.svg", width = 8, height = 8.5)
+save_map_svg(plot_ranking(ranking_data(vals_net), flow_def, spec_net),
+             "out/flow/ranking.svg", width = 6.5, height = 9)
+save_map_svg(plot_hist(vals_net, flow_def, spec_net, bins = 24),
+             "out/flow/hist.svg", width = 6.5, height = 4)
+
+flow_html <- render_page_html(
+  tpl_page, flow_def, footer,
+  unit_label = "都道府県、47 地域(2020 年の都道府県間移動 2,463,992 人)",
+  fetched_date = fetched_date,
+  boundary_source = paste0(BOUNDARY_SOURCE, "(塗り分けと重心座標に使用)"),
+  definition = "転入超過数 = 他都道府県からの転入者数 − 他都道府県への転出者数(日本人・外国人を含む移動者)")
+writeLines(flow_html, "out/flow/index.html", useBytes = TRUE)
+cards <- c(cards, render_card_html(
+  list(id = "flow", title = "都道府県間人口移動"),
+  "移動者数上位 30 フローの曲線束 + 転入超過の塗り分け(2020 年)"))
+
 writeLines(render_index_html(tpl_index, paste(cards, collapse = "\n"), footer),
            "out/index.html", useBytes = TRUE)
 message("done → out/")

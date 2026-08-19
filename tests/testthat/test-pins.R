@@ -14,8 +14,8 @@ test_that("pins.csv に必須 4 ソースが固定されている(T-020)", {
   pins <- read_csv(pins_path, col_types = "cccc")
   expect_true(all(c("filename", "url", "sha256", "license_note") == names(pins)))
 
-  # role はファイル名の接頭辞で表す: boundary_ / census2020_ / area_
-  roles <- c("boundary_", "census2020_", "area_")
+  # role はファイル名の接頭辞で表す: boundary_ / census2020_ / area_ / flow_
+  roles <- c("boundary_", "census2020_", "area_", "flow_")
   for (r in roles) {
     expect_true(any(startsWith(pins$filename, r)),
                 info = paste("必須ソースが未 pin:", r))

@@ -32,3 +32,17 @@
 | 効果検証 | 以後 5 ループで TOOL-ENV の再発 0 件なら Closed |
 | propagation | toukei-atlas ✅(本文書 + AGENTS.md §4)/ レジストリ還流 ⬜ |
 | 状態 | Open |
+
+## HC-003
+
+| 項目 | 内容 |
+|---|---|
+| 起票日 | 2026-08-19 |
+| トリガー | `PROC-SKIP` × 2(loop_001・loop_007: いずれも test_run の passed/failed を出力確認前に転記して誤記) |
+| 診断 | 「実行と記録を別コマンドで」という規範(AGENTS §2)だけでは再発した。数値の転記という作業自体が誤り得る工程であり、規範でなく道具で潰すべき |
+| 改訂 | `harness/testrun.py` を新設: testthat を実行し、実出力から counts を機械抽出して `test_run` を自動 append する。以後、テスト実行+記録はこのラッパー経由を必須とする(AGENTS §2 を書き換え) |
+| 種別 | tooling |
+| SCAFFOLD_VERSION | 1.8.0(プロジェクト局所。レジストリ還流は人間の承認待ち) |
+| 効果検証 | 以後 5 ループで PROC-SKIP の再発 0 件なら Closed |
+| propagation | toukei-atlas ✅(本文書 + AGENTS.md §2 + harness/testrun.py)/ レジストリ還流 ⬜ |
+| 状態 | Open |

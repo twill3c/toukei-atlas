@@ -2,3 +2,4 @@ filename,url,sha256,license_note
 boundary_n03_2021_gml.zip,https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2021/N03-20210101_GML.zip,73030abaf6293dd764306473723344b8b8e7f0537b3489c50654d0c2e1af41f6,"国土数値情報(行政区域データ 2021年版)国土交通省・CC BY 4.0 相当(出典明記)"
 census2020_major_results.xlsx,https://www.e-stat.go.jp/stat-search/file-download?statInfId=000032143614&fileKind=0,8971701164fe44332767f648a591a9f6398d92f019857a9341298322b2a843b4,"令和2年国勢調査 都道府県・市区町村別の主な結果(総務省統計局)e-Stat 利用規約(出典明記)"
 area_gsi_r1_r5_mencho.csv,https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/R1_R5_mencho.csv,f47b6d8eef144b86f8e1acae33716aad88052af98cf2a785c447a92dc5d2c3da,"全国都道府県市区町村別面積調(国土地理院)出典明記"
+flow_jumin2020_od.xlsx,https://www.e-stat.go.jp/stat-search/file-download?statInfId=000032047082&fileKind=0,a569f96a4043ff886649512a4e05cb3be6336cac103fb91d79a485d6538dfae2,"住民基本台帳人口移動報告 2020年 表2 移動前の住所地・男女別都道府県間移動者数(総務省統計局)e-Stat 利用規約(出典明記)"
