@@ -66,6 +66,6 @@ ref_out <- ref |>
   transmute(level, pref_code = substr(code, 1, 2), code, name,
             pop_total, pop_2015,
             area_ref = area_pub, density_ref = density_pub,
-            rate_65over_pub)
+            rate_65over_pub, hh_general, hh_single)
 write_csv(ref_out, "data/processed/prefectures_reference.csv")
 message("done")

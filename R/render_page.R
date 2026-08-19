@@ -36,9 +36,11 @@ render_card_html <- function(theme_def, summary_line) {
 theme_definition_text <- function(theme_def) {
   num_label <- c(pop_65over = "65 歳以上人口", pop_total = "総人口",
                  pop_0_14 = "0〜14 歳(15 歳未満)人口",
-                 pop_diff = "2020 年人口 − 2015 年組替人口")[theme_def$numerator]
+                 pop_diff = "2020 年人口 − 2015 年組替人口",
+                 hh_single = "単独世帯数")[theme_def$numerator]
   den_label <- c(pop_total = "総人口", area_km2 = "面積(km²)",
-                 pop_2015 = "2015 年組替人口")[theme_def$denominator]
+                 pop_2015 = "2015 年組替人口",
+                 hh_general = "一般世帯数")[theme_def$denominator]
   paste0(num_label, " ÷ ", den_label,
          if (theme_def$unit == "%") "(百分率)" else "")
 }

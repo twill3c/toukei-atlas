@@ -37,7 +37,10 @@ parse_census_major <- function(raw) {
     pop_65over = num_count(raw[[17]]),
     rate_0_14_pub  = num(raw[[18]]),
     rate_15_64_pub = num(raw[[19]]),
-    rate_65over_pub = num(raw[[20]])
+    rate_65over_pub = num(raw[[20]]),
+    # 世帯(loop_005 検算済み: col37=一般世帯, col46=うち単独世帯。不詳補完前の値)
+    hh_general = num_count(raw[[37]]),
+    hh_single  = num_count(raw[[46]])
   )
   out <- out[!is.na(out$code) & grepl("^[0-9]{5}$", out$code), ]
   out$pref_code <- substr(out$code, 1, 2)

@@ -32,6 +32,13 @@ THEMES <- list(
     numerator = "pop_0_14", denominator = "pop_total",
     scale = "seq", unit = "%",
     source = "国勢調査 2020（e-Stat）"
+  ),
+  list(
+    id = "tandoku",          # F-05
+    title = "単独世帯率",
+    numerator = "hh_single", denominator = "hh_general",
+    scale = "seq", unit = "%",
+    source = "国勢調査 2020（e-Stat）※世帯数は不詳補完前の値"
   )
-  # F-05 単独世帯率, F-06 カルトグラム, F-07 フローマップ は後続ループで追加
+  # F-06 カルトグラム, F-07 フローマップ は後続ループで追加
 )

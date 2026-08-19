@@ -10,7 +10,9 @@ fix <- data.frame(
   pop_2015  = c(1000, 1900, 550, 0),
   pop_0_14  = c(100, 300, 50, 0),
   pop_65over = c(300, 400, 200, 0),
-  area_km2  = c(4, 10, 25, 2)
+  area_km2  = c(4, 10, 25, 2),
+  hh_general = c(400, 1000, 200, 0),
+  hh_single  = c(100, 400, 30, 0)
 )
 
 theme_by_id <- function(id) THEMES[[which(vapply(THEMES, function(t) t$id, "") == id)]]
@@ -35,6 +37,13 @@ test_that("高齢化率・年少人口率(T-022 系)", {
   n <- compute_theme_values(fix, theme_by_id("nensho"))
   expect_equal(n$value[n$code == "22222"], 15)    # 300/2000
   expect_true(is.na(k$value[k$code == "44444"]))  # 0 人口 → NA
+})
+
+test_that("単独世帯率の計算と 0 世帯の扱い(T-024/F-05)", {
+  v <- compute_theme_values(fix, theme_by_id("tandoku"))
+  expect_equal(v$value[v$code == "11111"], 25)   # 100/400
+  expect_equal(v$value[v$code == "22222"], 40)   # 400/1000
+  expect_true(is.na(v$value[v$code == "44444"])) # 一般世帯 0 → NA
 })
 
 test_that("ランキング: 上位/下位 n 件・同値はコード順で安定(T-017)", {
