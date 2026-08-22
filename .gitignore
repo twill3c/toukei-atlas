@@ -13,3 +13,6 @@ out/
 # Vercel
 .vercel/
 build/*.log
+
+.vercel
+.env*
