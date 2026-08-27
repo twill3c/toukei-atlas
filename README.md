@@ -30,3 +30,9 @@ cd out && vercel deploy --prod
 ```
 
 Vercel に R ランタイムはないため、ビルドはローカルで行い `out/` だけをデプロイする。
+
+**push では本番に出さない。** `out/` は git 管理外なので、GitHub 連携がリポジトリルートを
+デプロイすると本番が全ページ 404 になる(2026-08-27 に実際に起きた)。
+`vercel.json` の `git.deploymentEnabled` で main への push を無効にしてある。
+本番反映は必ず上の `cd out && vercel deploy --prod` で行うこと。
+`out/.vercel/project.json` が無ければリポジトリルートの `.vercel/project.json` を複製する。
